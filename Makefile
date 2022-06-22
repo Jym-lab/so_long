@@ -11,10 +11,11 @@
 # **************************************************************************** #
 
 CC = gcc
-#CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 FSANI = -g3 -fsanitize=address
 RM = rm -f
 NAME = so_long
+LIB = ./lib/
 
 OS = $(shell uname -s)
 
@@ -26,23 +27,27 @@ else
 	LINK = -L $(MLX) -lmlx -lm -lXext -lX11
 endif
 
-INCLUDE = -I./include
-SRCS_PATH = ./srcs
-FILES = test.c
-SRCS = $(addprefix $(addsuffix /, $(SRCS_PATH)), $(FILES))
+INCLUDE = -I include
+SRCS_DIR = ./srcs
+FILES = main.c map.c
+SRCS = $(addprefix $(addsuffix /, $(SRCS_DIR)), $(FILES))
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
 $(NAME) : $(OBJS)
-		$(CC) $(OBJS) $(LINK) $(INCLUDE) -o $@
+		make -C $(LIB)
+		$(CC) -o $(NAME) $(OBJS) -L $(LIB) -lyjoo $(INCLUDE) $(LINK)
 
 re: fclean all
 
 clean:
+		make -C $(LIB) clean
+		make -C $(MLX) clean
 		$(RM) $(OBJS)
 
 fclean: clean
+		make -C $(LIB) fclean
 		$(RM) $(NAME)
 
 .PHONY: all re clean fclean
