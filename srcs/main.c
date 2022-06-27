@@ -6,7 +6,7 @@
 /*   By: yjoo <yjoo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 03:30:41 by yjoo              #+#    #+#             */
-/*   Updated: 2022/06/28 00:44:24 by yjoo             ###   ########.fr       */
+/*   Updated: 2022/06/28 06:06:23 by yjoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ static void	game_init(t_game *game)
 	game->img = img_init(game->mlx);
 	game->collec_cnt = 0;
 	game->walk_cnt = 0;
-	game->player_dir = 0;
+	game->player_dir = RIGHT;
+	game->exit_status = CLOSE;
 	img_update(game);
 }
 

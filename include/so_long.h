@@ -6,7 +6,7 @@
 /*   By: yjoo <yjoo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 01:28:50 by yjoo              #+#    #+#             */
-/*   Updated: 2022/06/28 01:16:59 by yjoo             ###   ########.fr       */
+/*   Updated: 2022/06/28 06:05:08 by yjoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 # define DESTROY_NOTIFY 17
 # define RIGHT 0
 # define LEFT 1
+# define OPEN 0
+# define CLOSE 1
 
 typedef struct s_img
 {
@@ -35,7 +37,7 @@ typedef struct s_img
 	void	*player[2];
 	void	*ground;
 	void	*collec;
-	void	*exit;
+	void	*exit[2];
 }		t_img;
 
 typedef struct s_game
@@ -49,6 +51,7 @@ typedef struct s_game
 	int		collec_cnt;
 	int		walk_cnt;
 	int		player_dir;
+	int		exit_status;
 	t_img	img;
 }		t_game;
 

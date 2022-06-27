@@ -40,7 +40,7 @@ void	w_event(t_game *game)
 		{
 			game->collec_cnt++;
 			if (game->t_collec == game->collec_cnt)
-				open_exit_img(game);
+				game->exit_status = OPEN;
 		}
 		game->map_info[i][j] = '0';
 		game->map_info[i - 1][j] = 'P';
@@ -68,7 +68,7 @@ void	a_event(t_game *game)
 		{
 			game->collec_cnt++;
 			if (game->t_collec == game->collec_cnt)
-				open_exit_img(game);
+				game->exit_status = OPEN;
 		}
 		game->map_info[i][j] = '0';
 		game->map_info[i][j - 1] = 'P';
@@ -97,7 +97,7 @@ void	s_event(t_game *game)
 		{
 			game->collec_cnt++;
 			if (game->t_collec == game->collec_cnt)
-				open_exit_img(game);
+				game->exit_status = OPEN;
 		}
 		game->map_info[i][j] = '0';
 		game->map_info[i + 1][j] = 'P';
@@ -125,7 +125,7 @@ void	d_event(t_game *game)
 		{
 			game->collec_cnt++;
 			if (game->t_collec == game->collec_cnt)
-				open_exit_img(game);
+				game->exit_status = OPEN;
 		}
 		game->map_info[i][j] = '0';
 		game->map_info[i][j + 1] = 'P';

@@ -57,6 +57,13 @@ static int	rect_check(t_game *game)
 	return (1);
 }
 
+static void	var_init(int *i, int *e_cnt, int *p_cnt)
+{
+	*i = -1;
+	*e_cnt = 0;
+	*p_cnt = 0;
+}
+
 static int	param_check(t_game *game)
 {
 	int	i;
@@ -64,9 +71,7 @@ static int	param_check(t_game *game)
 	int	e_cnt;
 	int	p_cnt;
 
-	i = -1;
-	e_cnt = 0;
-	p_cnt = 0;
+	var_init(&i, &e_cnt, &p_cnt);
 	game->t_collec = 0;
 	while (++i < game->cols && game->map_info[i])
 	{
@@ -79,6 +84,8 @@ static int	param_check(t_game *game)
 				p_cnt++;
 			else if (game->map_info[i][j] == 'C')
 				game->t_collec++;
+			else if (game->map_info[i][j] != '1' && game->map_info[i][j] != '0')
+				return (0);
 		}
 	}
 	if (e_cnt == 0 || game->t_collec == 0 || p_cnt != 1)

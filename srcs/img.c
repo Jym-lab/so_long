@@ -23,7 +23,8 @@ t_img	img_init(void *mlx)
 	ret.player[RIGHT] = mlx_xpm_file_to_image(mlx, "xpm/player_r.xpm", &w, &h);
 	ret.wall = mlx_xpm_file_to_image(mlx, "xpm/wall.xpm", &w, &h);
 	ret.collec = mlx_xpm_file_to_image(mlx, "xpm/collec.xpm", &w, &h);
-	ret.exit = mlx_xpm_file_to_image(mlx, "xpm/close_exit.xpm", &w, &h);
+	ret.exit[CLOSE] = mlx_xpm_file_to_image(mlx, "xpm/close_exit.xpm", &w, &h);
+	ret.exit[OPEN] = mlx_xpm_file_to_image(mlx, "xpm/open_exit.xpm", &w, &h);
 	return (ret);
 }
 
@@ -31,27 +32,21 @@ static void	ft_putimg(t_game *g, int x, int y)
 {
 	t_img	img;
 	int		d;
+	int		s;
 
 	img = g->img;
 	d = g->player_dir;
+	s = g->exit_status;
 	if (g->map_info[y][x] == '1')
 		mlx_put_image_to_window(g->mlx, g->win, img.wall, x * 64, y * 64);
 	if (g->map_info[y][x] == '0')
 		mlx_put_image_to_window(g->mlx, g->win, img.ground, x * 64, y * 64);
 	if (g->map_info[y][x] == 'E')
-		mlx_put_image_to_window(g->mlx, g->win, img.exit, x * 64, y * 64);
+		mlx_put_image_to_window(g->mlx, g->win, img.exit[s], x * 64, y * 64);
 	if (g->map_info[y][x] == 'P')
 		mlx_put_image_to_window(g->mlx, g->win, img.player[d], x * 64, y * 64);
 	if (g->map_info[y][x] == 'C')
 		mlx_put_image_to_window(g->mlx, g->win, img.collec, x * 64, y * 64);
-}
-
-void	open_exit_img(t_game *g)
-{
-	int	w;
-	int	h;
-
-	g->img.exit = mlx_xpm_file_to_image(g->mlx, "xpm/open_exit.xpm", &w, &h);
 }
 
 void	img_update(t_game *game)
