@@ -6,7 +6,7 @@
 /*   By: yjoo <yjoo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 03:30:41 by yjoo              #+#    #+#             */
-/*   Updated: 2022/06/27 03:25:38 by yjoo             ###   ########.fr       */
+/*   Updated: 2022/06/28 00:44:24 by yjoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,13 @@ static void	game_init(t_game *game)
 	game->win = mlx_new_window(game->mlx, game->rows * 64,
 			game->cols * 64, "so_long");
 	game->img = img_init(game->mlx);
-	img_update(game, game->mlx, game->win, game->img);
+	game->collec_cnt = 0;
+	game->walk_cnt = 0;
+	game->player_dir = 0;
+	img_update(game);
 }
 
-static int	game_exit(t_game *game)
+int	game_exit(t_game *game)
 {
 	mlx_destroy_window(game->mlx, game->win);
 	exit(EXIT_SUCCESS);
@@ -56,8 +59,8 @@ int	main(int ac, char **av)
 		exit_msg("./so_long [path/map.ber]\n");
 	get_map(av[1], &game);
 	game_init(&game);
-	mlx_hook(game.win, KEY_PRESS, 1, &input_key, &game);
-	mlx_hook(game.win, DESTROY_NOTIFY, 1, &game_exit, &game);
+	mlx_hook(game.win, KEY_PRESS, 0, &input_key, &game);
+	mlx_hook(game.win, DESTROY_NOTIFY, 0, &game_exit, &game);
 	mlx_loop(game.mlx);
 	return (0);
 }

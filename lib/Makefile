@@ -6,7 +6,7 @@
 #    By: yjoo <yjoo@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/22 19:31:51 by yjoo              #+#    #+#              #
-#    Updated: 2022/06/24 01:39:17 by yjoo             ###   ########.fr        #
+#    Updated: 2022/06/27 18:55:00 by yjoo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ $(NAME) : $(GNL_OBJS)
 		cp $(LIB_DIR)/libft.a .
 		ar -x libft.a
 		ar rcs $(NAME) *.o $(GNL_OBJS)
-		rm *.o libft.a
+		rm *.o libft.a $(TRASH)
 
 clean : 
 		make -C $(LIB_DIR) clean

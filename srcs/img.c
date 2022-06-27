@@ -15,18 +15,46 @@
 t_img	img_init(void *mlx)
 {
 	t_img	ret;
-	int		wid;
-	int		hei;
+	int		w;
+	int		h;
 
-	ret.ground = mlx_xpm_file_to_image(mlx, "xpm/ground.xpm", &wid, &hei);
-	ret.player = mlx_xpm_file_to_image(mlx, "xpm/player.xpm", &wid, &hei);
-	ret.wall = mlx_xpm_file_to_image(mlx, "xpm/wall.xpm", &wid, &hei);
-	ret.collec = mlx_xpm_file_to_image(mlx, "xpm/collec.xpm", &wid, &hei);
-	ret.exit = mlx_xpm_file_to_image(mlx, "xpm/exit.xpm", &wid, &hei);
+	ret.ground = mlx_xpm_file_to_image(mlx, "xpm/ground.xpm", &w, &h);
+	ret.player[LEFT] = mlx_xpm_file_to_image(mlx, "xpm/player_l.xpm", &w, &h);
+	ret.player[RIGHT] = mlx_xpm_file_to_image(mlx, "xpm/player_r.xpm", &w, &h);
+	ret.wall = mlx_xpm_file_to_image(mlx, "xpm/wall.xpm", &w, &h);
+	ret.collec = mlx_xpm_file_to_image(mlx, "xpm/collec.xpm", &w, &h);
+	ret.exit = mlx_xpm_file_to_image(mlx, "xpm/close_exit.xpm", &w, &h);
 	return (ret);
 }
 
-void	img_update(t_game *game, void *mlx, void *win, t_img img)
+static void	ft_putimg(t_game *g, int x, int y)
+{
+	t_img	img;
+	int		d;
+
+	img = g->img;
+	d = g->player_dir;
+	if (g->map_info[y][x] == '1')
+		mlx_put_image_to_window(g->mlx, g->win, img.wall, x * 64, y * 64);
+	if (g->map_info[y][x] == '0')
+		mlx_put_image_to_window(g->mlx, g->win, img.ground, x * 64, y * 64);
+	if (g->map_info[y][x] == 'E')
+		mlx_put_image_to_window(g->mlx, g->win, img.exit, x * 64, y * 64);
+	if (g->map_info[y][x] == 'P')
+		mlx_put_image_to_window(g->mlx, g->win, img.player[d], x * 64, y * 64);
+	if (g->map_info[y][x] == 'C')
+		mlx_put_image_to_window(g->mlx, g->win, img.collec, x * 64, y * 64);
+}
+
+void	open_exit_img(t_game *g)
+{
+	int	w;
+	int	h;
+
+	g->img.exit = mlx_xpm_file_to_image(g->mlx, "xpm/open_exit.xpm", &w, &h);
+}
+
+void	img_update(t_game *game)
 {
 	int	i;
 	int	j;
@@ -37,16 +65,7 @@ void	img_update(t_game *game, void *mlx, void *win, t_img img)
 		j = 0;
 		while (j < game->rows && game->map_info[i][j])
 		{
-			if (game->map_info[i][j] == '1')
-				mlx_put_image_to_window(mlx, win, img.wall, j * 64, i * 64);
-			if (game->map_info[i][j] == '0')
-				mlx_put_image_to_window(mlx, win, img.ground, j * 64, i * 64);
-			if (game->map_info[i][j] == 'E')
-				mlx_put_image_to_window(mlx, win, img.exit, j * 64, i * 64);
-			if (game->map_info[i][j] == 'P')
-				mlx_put_image_to_window(mlx, win, img.player, j * 64, i * 64);
-			if (game->map_info[i][j] == 'C')
-				mlx_put_image_to_window(mlx, win, img.collec, j * 64, i * 64);
+			ft_putimg(game, j, i);
 			j++;
 		}
 		i++;
