@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -g -Wall -Wextra -Werror
 FSANI = -g3 -fsanitize=address
 RM = rm -f
 NAME = so_long
@@ -29,7 +29,7 @@ endif
 
 INCLUDE = -I include
 SRCS_DIR = ./srcs
-FILES = main.c map.c
+FILES = main.c map.c map_check.c img.c key_event.c
 SRCS = $(addprefix $(addsuffix /, $(SRCS_DIR)), $(FILES))
 OBJS = $(SRCS:.c=.o)
 
@@ -37,6 +37,7 @@ all: $(NAME)
 
 $(NAME) : $(OBJS)
 		make -C $(LIB)
+		make -C $(MLX)
 		$(CC) -o $(NAME) $(OBJS) -L $(LIB) -lyjoo $(INCLUDE) $(LINK)
 
 re: fclean all

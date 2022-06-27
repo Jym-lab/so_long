@@ -6,13 +6,13 @@
 /*   By: yjoo <yjoo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 02:17:57 by yjoo              #+#    #+#             */
-/*   Updated: 2022/06/23 05:18:13 by yjoo             ###   ########.fr       */
+/*   Updated: 2022/06/24 02:26:14 by yjoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-static	int	ext_check(char *filename, char *ext)
+static int	ext_check(char *filename, char *ext)
 {
 	int	i;
 	int	j;
@@ -65,4 +65,5 @@ void	get_map(char *filename, t_game *game)
 	if (!ext_check(filename, MAP_EXT))
 		exit_msg("Wrong extension check the extension\n");
 	open_map(filename, game);
+	map_check(game);
 }

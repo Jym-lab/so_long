@@ -6,7 +6,7 @@
 #    By: yjoo <yjoo@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/22 19:31:51 by yjoo              #+#    #+#              #
-#    Updated: 2022/06/22 22:53:35 by yjoo             ###   ########.fr        #
+#    Updated: 2022/06/24 01:39:17 by yjoo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ CC = gcc
 CFLAGS = -Werror -Wall -Wextra
 RM = rm -f
 NAME = libyjoo.a
+TRASH = __.SYMDEF\ SORTED
 
 LIB_DIR = ./libft
 GNL_DIR = ./get_next_line
@@ -27,7 +28,7 @@ $(NAME) : $(GNL_OBJS)
 		cp $(LIB_DIR)/libft.a .
 		ar -x libft.a
 		ar rcs $(NAME) *.o $(GNL_OBJS)
-		rm *.o libft.a __.SYMDEF\ SORTED
+		rm *.o libft.a
 
 clean : 
 		make -C $(LIB_DIR) clean
