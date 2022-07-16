@@ -36,23 +36,15 @@ void	w_event(t_game *game)
 	find_player(game, &i, &j);
 	if (game->map_info[i - 1][j] != '1' && game->map_info[i - 1][j] != 'E')
 	{
-		if (game->map_info[i - 1][j] == 'C')
-		{
-			game->collec_cnt++;
-			if (game->t_collec == game->collec_cnt)
-				game->exit_status = OPEN;
-		}
 		game->map_info[i][j] = '0';
-		game->map_info[i - 1][j] = 'P';
-		game->walk_cnt++;
-		img_update(game);
-		printf("walk : %d\n", game->walk_cnt);
+		move(game, i - 1, j);
 	}
 	if (game->map_info[i - 1][j] == 'E')
 	{
 		if (game->t_collec == game->collec_cnt)
 			game_exit(game);
 	}
+	img_update(game);
 }
 
 void	a_event(t_game *game)
@@ -62,26 +54,18 @@ void	a_event(t_game *game)
 
 	i = 0;
 	find_player(game, &i, &j);
+	game->player_dir = LEFT;
 	if (game->map_info[i][j - 1] != '1' && game->map_info[i][j - 1] != 'E')
 	{
-		if (game->map_info[i][j - 1] == 'C')
-		{
-			game->collec_cnt++;
-			if (game->t_collec == game->collec_cnt)
-				game->exit_status = OPEN;
-		}
 		game->map_info[i][j] = '0';
-		game->map_info[i][j - 1] = 'P';
-		game->walk_cnt++;
-		game->player_dir = LEFT;
-		img_update(game);
-		printf("walk : %d\n", game->walk_cnt);
+		move(game, i, j - 1);
 	}
 	if (game->map_info[i][j - 1] == 'E')
 	{
 		if (game->t_collec == game->collec_cnt)
 			game_exit(game);
 	}
+	img_update(game);
 }
 
 void	s_event(t_game *game)
@@ -93,23 +77,15 @@ void	s_event(t_game *game)
 	find_player(game, &i, &j);
 	if (game->map_info[i + 1][j] != '1' && game->map_info[i + 1][j] != 'E')
 	{
-		if (game->map_info[i + 1][j] == 'C')
-		{
-			game->collec_cnt++;
-			if (game->t_collec == game->collec_cnt)
-				game->exit_status = OPEN;
-		}
 		game->map_info[i][j] = '0';
-		game->map_info[i + 1][j] = 'P';
-		game->walk_cnt++;
-		img_update(game);
-		printf("walk : %d\n", game->walk_cnt);
+		move(game, i + 1, j);
 	}
 	if (game->map_info[i + 1][j] == 'E')
 	{
 		if (game->t_collec == game->collec_cnt)
 			game_exit(game);
 	}
+	img_update(game);
 }
 
 void	d_event(t_game *game)
@@ -119,24 +95,16 @@ void	d_event(t_game *game)
 
 	i = 0;
 	find_player(game, &i, &j);
-	if (game->map_info[i][j + 1] != '1' && game->map_info[i][j + 1] != 'E')
+	game->player_dir = RIGHT;
+	if (game->map_info[i][j + 1] != '1' && game->map_info[i + 1][j] != 'E')
 	{
-		if (game->map_info[i][j + 1] == 'C')
-		{
-			game->collec_cnt++;
-			if (game->t_collec == game->collec_cnt)
-				game->exit_status = OPEN;
-		}
 		game->map_info[i][j] = '0';
-		game->map_info[i][j + 1] = 'P';
-		game->walk_cnt++;
-		game->player_dir = RIGHT;
-		img_update(game);
-		printf("walk : %d\n", game->walk_cnt);
+		move(game, i, j + 1);
 	}
 	if (game->map_info[i][j + 1] == 'E')
 	{
 		if (game->t_collec == game->collec_cnt)
 			game_exit(game);
 	}
+	img_update(game);
 }

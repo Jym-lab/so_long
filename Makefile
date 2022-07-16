@@ -29,7 +29,7 @@ endif
 
 INCLUDE = -I include
 SRCS_DIR = ./srcs
-FILES = main.c map.c map_check.c img.c key_event.c
+FILES = main.c map.c map_check.c img.c key_event.c move.c
 SRCS = $(addprefix $(addsuffix /, $(SRCS_DIR)), $(FILES))
 OBJS = $(SRCS:.c=.o)
 

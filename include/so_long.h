@@ -6,7 +6,7 @@
 /*   By: yjoo <yjoo@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 01:28:50 by yjoo              #+#    #+#             */
-/*   Updated: 2022/06/28 06:05:08 by yjoo             ###   ########.fr       */
+/*   Updated: 2022/07/16 13:13:54 by yjoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,9 @@ void	w_event(t_game *game);
 void	a_event(t_game *game);
 void	s_event(t_game *game);
 void	d_event(t_game *game);
+void	move(t_game *game, int i, int j);
 
-int	game_exit(t_game *game);
+int		game_exit(t_game *game);
 
 t_img	img_init(void *mlx);
 
